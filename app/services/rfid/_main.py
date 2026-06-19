@@ -16,7 +16,9 @@ class RfidManager:
 
 		# connect to devices
 		self.devices = DeviceManager(
-			devices_path=devices_path, example_path=example_path, event_func=self.on_event
+			devices_path=devices_path,
+			example_path=f'{example_path}/devices',
+			event_func=self.on_event,
 		)
 
 		# INTEGRATION
