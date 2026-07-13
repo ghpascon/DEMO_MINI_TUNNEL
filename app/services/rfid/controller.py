@@ -46,9 +46,13 @@ class Controller:
 
 		# logging.info(f'box_id={box_id}, qtd={qtd}, sku={sku}, datetime={dt_str}')
 
-		self.box_info = {'box_id': parts[0], 'qty': parts[1]}
-		logging.info(f'Updating box info: {self.box_info}')
-		self.state_msg = {'text': 'Box info updated', 'level': 'success'}
+		try:
+			self.box_info = {'box_id': parts[0], 'qty': int(parts[1])}
+			logging.info(f'Updating box info: {self.box_info}')
+			self.state_msg = {'text': 'Box info updated', 'level': 'success'}
+		except (ValueError, IndexError) as e:
+			self.state_msg = {'text': 'Invalid format.', 'level': 'error'}
+			logging.error(f'Failed to update box info: {e}')
 
 	def validate_box_info(self, name: str):
 		status = True

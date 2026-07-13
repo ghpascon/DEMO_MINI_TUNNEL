@@ -1,10 +1,7 @@
 {
   "READER": "X714",
-  "CONNECTION_TYPE": "SERIAL",
-  "PORT": "AUTO",
-  "BAUDRATE": 115200,
-  "VID": 1,
-  "PID": 1,
+  "CONNECTION_TYPE": "BLE",
+  "BLE_NAME": "SMTX",
   "BUZZER": true,
   "SESSION": 1,
   "START_READING": true,
