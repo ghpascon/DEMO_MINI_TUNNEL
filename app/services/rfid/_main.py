@@ -73,8 +73,9 @@ class RfidManager:
 		if self.controller.state_sent:
 			return
 
-		if self.controller.epc_in_last_tags(tag_data.get('epc', '')):
-			return
+		if settings.CLEAR_OLD_TAGS_ACTIVE:
+			if self.controller.epc_in_last_tags(tag_data.get('epc', '')):
+				return
 		new_tag, tag = self.tags.add(tag_data, device=name)
 
 		# NEW TAG

@@ -48,6 +48,7 @@ class Settings:
 		self.PORT: int = data.get('PORT', 5000)
 		self.VALIDATION_TIME: int = data.get('VALIDATION_TIME', 3000)
 		self.CLEAR_OLD_TAGS_MINUTES: int = data.get('CLEAR_OLD_TAGS_MINUTES', 20)
+		self.CLEAR_OLD_TAGS_ACTIVE: bool = data.get('CLEAR_OLD_TAGS_ACTIVE', False)
 
 	def get_current_settings(self):
 		return {
