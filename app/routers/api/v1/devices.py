@@ -316,3 +316,74 @@ async def write_gpo(device_name: str, gpo_data: GpoSchema):
 			'error': msg,
 		},
 	)
+
+
+@router.get(
+	'/get_serial_number/{device_name}',
+	summary='Get device serial number',
+	description='Returns the serial number of the specified device.',
+)
+async def get_serial_number(device_name: str):
+	success, serial_number = rfid_manager.devices.get_serial_number(device_name)
+	if success:
+		return JSONResponse(
+			status_code=200,
+			content={
+				'device_name': device_name,
+				'serial_number': serial_number,
+			},
+		)
+	return JSONResponse(
+		status_code=400,
+		content={
+			'message': f"Failed to get serial number for device '{device_name}': {serial_number}",
+			'error': serial_number,
+		},
+	)
+
+
+@router.post('/create_device/{device_name}', summary='Create a new device configuration')
+async def create_device(device_name: str, data: dict):
+	success, error = await rfid_manager.devices.create_device_config(device_name, data)
+	if success:
+		return JSONResponse(content={'status': 'created', 'device': device_name})
+	return JSONResponse(content={'status': 'error', 'message': error}, status_code=400)
+
+
+@router.put('/update_device/{device_name}', summary='Update an existing device configuration')
+async def update_device(device_name: str, data: dict):
+	success, error = await rfid_manager.devices.update_device_config(device_name, data)
+	if success:
+		return JSONResponse(content={'status': 'updated', 'device': device_name})
+	return JSONResponse(content={'status': 'error', 'message': error}, status_code=400)
+
+
+@router.delete('/delete_device/{device_name}', summary='Delete a device configuration')
+async def delete_device(device_name: str):
+	success, error = await rfid_manager.devices.delete_device_config(device_name)
+	if success:
+		return JSONResponse(content={'status': 'deleted', 'device': device_name})
+	return JSONResponse(content={'status': 'error', 'message': error}, status_code=400)
+
+
+@router.post(
+	'/set_power/{device_name}/{power}',
+	summary='Set device power level',
+	description='Sets the power level of the specified device. Power level should be an integer value.',
+)
+async def set_power(device_name: str, power: int):
+	success, msg = await rfid_manager.devices.set_power(device_name, power)
+	if success:
+		return JSONResponse(
+			status_code=200,
+			content={
+				'message': f"Power level set to {power} for device '{device_name}'.",
+			},
+		)
+	return JSONResponse(
+		status_code=400,
+		content={
+			'message': f"Failed to set power level for device '{device_name}': {msg}",
+			'error': msg,
+		},
+	)

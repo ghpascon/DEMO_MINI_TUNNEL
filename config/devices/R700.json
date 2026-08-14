@@ -1,20 +1,20 @@
 {
-    "READER": "R700_IOT",
-    "IP": "impinj-14-46-36",
-    "USERNAME": "root",
-    "PASSWORD": "impinj",
-    "START_READING": false,
-    "SESSION": 1,
-    "ACTIVE_ANT": [
-        1,
-        2,
-        3,
-        4
-    ],
-    "READ_POWER": 33,
-    "READ_RSSI": -80,
-    "SEARCH_MODE": "single-target",
-    "RF_MODE": 1111,
-    "GPI_START": true,
-    "FIRMWARE_VERSION": "8.4.1"
+  "reader": "R700_IOT",
+  "ip": "impinj-14-46-36",
+  "username": "root",
+  "password": "impinj",
+  "start_reading": false,
+  "session": 1,
+  "active_ant": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "read_power": 30,
+  "read_rssi": -80,
+  "search_mode": "single-target",
+  "rf_mode": 1111,
+  "gpi_start": true,
+  "firmware_version": "8.4.1"
 }
